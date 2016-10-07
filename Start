@@ -1,0 +1,155 @@
++namespace Helper
++{
++    class MyBot
++    {
++        DiscordClient discord;
++        CommandService commands;
++
++        public MyBot()
++        {
++            discord = new DiscordClient(x =>
++            {
++                x.LogLevel = LogSeverity.Info;
++                x.LogHandler = Log;
++            });
++
++            discord.UsingCommands(x =>
++            {
++                x.PrefixChar = '?';
++                x.AllowMentionPrefix = true;
++            });
++
++            commands = discord.GetService<CommandService>();
++
++            ReferenceCommand();
++
++
++
++
++
++}
++
++        private void ReferenceCommand()
++        {
++            commands.CreateCommand("fractal")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendFile("Reference/list.png");
++                });
++
++            commands.CreateCommand("tc")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendFile("Reference/Tc.jpg");
++                });
++
++            commands.CreateCommand("exitem")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendFile("Reference/exotic.png");
++                });
++
++            commands.CreateCommand("help")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("Available commands are ?help, ?helper, ?raidhelp, ?bounty, ?buildeditor, ?development, ?exitem, ?fractal, ?taco, ?tc, ?trek");
++                });
++
++            commands.CreateCommand("trek")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("https://wiki.guildwars2.com/wiki/Guild_Trek");
++                });
++
++            commands.CreateCommand("bounty")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("https://wiki.guildwars2.com/wiki/Guild_Bounty");
++                });
++
++            commands.CreateCommand("taco")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2taco.blogspot.com/");
++                });
++
++            commands.CreateCommand("raidhelp")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("?medicnecro, ?condinecro, ?mattnecro, ?tanknecro, ?powernecro ?basicdruid, ?condips, ?ps, ?chronotank");
++                });
++
++            commands.CreateCommand("medicnecro")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vRAQRBLRtG2IDN0ZjN3g3NwhjDjhSO0fwGE/5AYbnpQM8CA-TBSAQBU4oAcTlgYTJVA1PAgXAAD3fIiq/ESlLkCYRlVA-e Notes: Variant for Sloth. You can take Lingering Curse over Parasitic Contagion if you don't feel like you need the additional self-sustain, useful when taking condis from people.");
++                });
++
++            commands.CreateCommand("condinecro")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vRAQRBLRtGyIDN0cjV3AHOWKGsoAwAIBIV0CBdg4eYRMJC-TBSAQBA4FAww9HCpylAqfIiq/gNlU3UJIFOKAkCYRlVA-e Notes: Variant for wing 1 and Xera.Blank spot can be for Epi(on xera and gorse, or if condi bouncing off of seekers on VG) or Suffer/ Rise.On Gorseval, take both Epi and Suffer if holding a spirit and drop BIP because might is usually fine unless the PS are fucking up.");
++                });
++
++            commands.CreateCommand("mattnecro")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vRAQRBLRtGyIDN0ZjV3AHOOMGK5Q/BbQ8nDgtdmCxwLA-TBSAQBYTJFFOKA3UJYIVuww9HCo+hIq+DAeBAkCYRlVA-e Notes: Variant for Matthias. If CC is bad, reaper can be taken instead (traits are middle, down, middle) for the shroud CC. In that case, death magic should be dropped, because blood is still needed for transfusion. The blank spot can either be for Rise(more minions to transfer condis),  Epi(for ice patches, no need to really worry about it if you have condi PS / eles) or Suffer (for short cooldown condi transfer if needed)");
++                });
++
++            commands.CreateCommand("powernecro")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("Valk: http://gw2skills.net/editor/?vRAQNBhQDbkhGapxaawxGYvxCugBNACAtgpxWToKEfF/ijRA-TBSBABMqEEgnAAlqB8wFBALlfWq6je6Gua/BSBMwOL-e Notes: Advantage: 7k more HP, more DPS if you have perfect buffs/conditions. Disadvantage: If what your attacking doesn't have vuln your dps is horrible. (Adds ect...) | Zerk: http://gw2skills.net/editor/?vRMQNBhQDbkhGapxaawxGYvxCugFfF/ijRoBQAoFMN2aCVBA-ThRBABUq+zDXEgr2fU+ZmSQAeCA4pbgUADsMC-e Notes: Advantage: Doesn't have to worry about vuln, banners, or spotter. Also more consistant dps. Disadvantage Less Hp.");
++                });
++
++            commands.CreateCommand("tanknecro")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vRAQNAR4YnM0At0gdbCO2As3gFcBT6r11CbQDgAQLI+K+FDjA-TxRBQBA4BA8gLAgB3fIR6A8k6PdR5HaUCSKgM3aB-e Notes: Advantage: Highest DPS pure tank, Highest EHP and damage reduction tank, super easy to use letting you focus on learning to tank correctly. Disadvantage: Low DPS(25 % loss over normal power reaper), less efficient compositions then Chronomancer");
++                });
++
++            commands.CreateCommand("basicdruid")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vNAQJAWWn0rC1sitqA+sAEtiFGBzZ0FsaawP1qaWlJc9tCAl8sHA-TxxGQB1S53Q2fQRq/QunAgHVCCgLBQb0FAA-e Notes: Basic magi druid build, accessories can be substituted for a mix of berserker/cleric's depending on tank toughness. For Kc/Xera same build but use stone+nature spirit/nature's vengance. Skill choice varies on fights, like Signet of Renewal for Sloth, Tides / Entangle for VG, etc ");
++                });
++
++            commands.CreateCommand("buildeditor")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://en.gw2skills.net/editor/");
++                });
++
++            commands.CreateCommand("ps")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://en.gw2skills.net/editor/?vJAQNAR5enckC9dg1eAefAEliliAzYA8ACAvD3k7zNJI8DeeA-TRSBAB4pb4hLAAZKxA4BAc1+jyDNOCAmpEkS1fG4gAQGA9xA-e");
++                });
++
++            commands.CreateCommand("condips")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://en.gw2skills.net/editor/?vJAQNAT8fnckCVeg1eAefAEliFoA7IBGASZvt2a7uNZFkCydA-TBSFQBA4iAQgnAQ/U/hYK9anuhRqEEO7P0QlBkCYRlVA-e");
++                });
++
++            commands.CreateCommand("chronotank")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("http://gw2skills.net/editor/?vhAQNAs+dncfC9filfCGoBUrhlnjq+PT0F9sACgEDdx+gHD-ThSBQBfb6BAOJAXUZA+0KMxHAw/2f4e6AIpSwDq+zDV6RKgAnaB-e Notes: Commanders for best balance between dps and boonsharing. Can use minstrel stats on armour for more toughness and health without affecting boonsharing.");
++                });
++
++            commands.CreateCommand("helper")
++                .Do(async (e) =>
++                {
++                    await e.Channel.SendMessage("I'm helping");
++                });
++
++        }
++
++        private void Log(object sender, LogMessageEventArgs e)
++        {
++            Console.WriteLine(e.Message);
++        }
++    }
++}
